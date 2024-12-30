@@ -3,8 +3,8 @@
 using namespace std;
 namespace fs = filesystem;
 
-int NUM_VEHICLE= 25;
-int CAPACITY=1000;
+int NUM_VEHICLE;
+int CAPACITY;
 #define NUM_CUSTOMER 100
 
 struct Customer {
@@ -344,6 +344,7 @@ public:
             vector<Route> routes = this->parallelRouteBuilding(seed,ap.first,ap.second);
             if(routes.size()>0){
                 double cs = this->getPrice(routes);
+                //this->show(routes);
                 if(this->finnalRoute.size()==0){
                     this->finnalRoute = routes;
                     this->price = cs;
@@ -395,7 +396,7 @@ public:
     
 };
 bool fully(){
-    string path = "D:\\python\\norrmalPracticePy\\vrptwData";
+    string path = "D:\\python\\project1\\vrptwData";
     vector<string> paths;
     vector<pair<double,double>> alpha;
     alpha.push_back({0.5,0.5});
@@ -411,7 +412,7 @@ bool fully(){
         VRPTW solver(CAPACITY,alpha);
 
         if (!solver.loadInput(paths[t])) return false;
-        cout<<paths[t].substr(38,5)<<endl;
+        cout<<paths[t].substr(29,5)<<endl;
         auto routes = solver.buildSeed();
         vector<int> seed = solver.initial_seed(routes);
         solver.backtrack(seed);
@@ -431,7 +432,7 @@ bool fully(){
     return true;
 }
 bool single(string f){
-    string path = "D:\\python\\norrmalPracticePy\\vrptwData\\" + f;
+    string path = "D:\\python\\project1\\vrptwData" + f;
     vector<pair<double,double>> alpha;
     alpha.push_back({0.5,0.5});
     alpha.push_back({0.75,0.25});
